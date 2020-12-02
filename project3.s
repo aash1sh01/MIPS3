@@ -10,3 +10,8 @@
 	    la $s0, reply		#Loading the adress of input to the first permanent value storing register $s0 and to work through the string.
             li $s1, 0 			#start pointer to make sure that we collect only 4 characters and a comma.
             li $s2, 0			#end pointer to make sure what characters we have collected and read.
+	list:
+	    la $s1, ($s2)		#content of s2 has been passed as data of s1 to make sure iterate through the string, from start pointer to end pointer.
+	sub_string:
+	    add $t1, $s0, $s2 	        #iterator taking the start address and the endpointer's sum to make sure $t1 acts as the array pointer
+            lb $t2, 0($t1) 		#loading the current character

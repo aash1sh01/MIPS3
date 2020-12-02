@@ -15,3 +15,8 @@
 	sub_string:
 	    add $t1, $s0, $s2 	        #iterator taking the start address and the endpointer's sum to make sure $t1 acts as the array pointer
             lb $t2, 0($t1) 		#loading the current character
+	beq $t2, 0, end_substring	#a few criteron to exit the loop while iterating through the substrings on space null and new line
+            beq $t2, 10, end_substring
+            beq $t2, 44, end_substring
+ 	    add $s2, $s2, 1     #Increasing the count of the iterator pointer so that we move through the string to the next character.
+            j sub_string

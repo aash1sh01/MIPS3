@@ -18,8 +18,16 @@
 	    beq $t2, 0, end_substring	#a few criteron to exit the loop while iterating through the substrings on space null and new line
             beq $t2, 10, end_substring
             beq $t2, 44, end_substring
- 	    add $s2, $s2, 1     #Increasing the count of the iterator pointer so that we move through the string to the next character.
+ 	    add $s2, $s2, 1     	#Increasing the count of the iterator pointer so that we move through the string to the next character.
             j sub_string
-	end_substring:		#now we reach at the end of substring, it will contain subprogram calls and stack operation.      			
-            la $a0, ($s1)	#loading arguments to make a subprogram_B call
+	end_substring:			#now we reach at the end of substring, it will contain subprogram calls and stack operation.      			
+            la $a0, ($s1)		#loading arguments to make a subprogram_A call
             la $a1, ($s2)
+	#calling subprogram_A after passing the contents from a0 and a1
+            jal subprogram_A
+	subprogram_A:
+            la $s7, ($ra)		#loading the value from $ra to register $s7
+            la $t9, ($a0)		#loading the value from $a0 to register $t9
+
+            addi $t8, $a1, 0 		#storing the end address
+            la $t7, reply  		#loading the first address of the user input
